@@ -8,6 +8,15 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameEvent presentCollisionEvent;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            AddScore();
+        }
+    }
+
+    [ContextMenu("AddScore")]
     public void AddScore()
     {
         Debug.Log(score.score);
