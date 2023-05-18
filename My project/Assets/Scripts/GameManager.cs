@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
         Debug.Log(score.score);
         score.AddScore(1);
     }
+
     public void GameOverDebug()
     {
         Debug.Log("GameOver");

@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f49c9e522d0dc94397750ffeae28943, type: 3}
   m_Name: PlayerScore
   m_EditorClassIdentifier: 
+  targetScoreEvent: {fileID: 11400000, guid: 3d8b72779e5dd8e4481a14c13ea535fb, type: 2}
