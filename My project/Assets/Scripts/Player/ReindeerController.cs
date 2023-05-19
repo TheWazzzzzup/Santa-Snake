@@ -27,6 +27,7 @@ public class ReindeerController : MonoBehaviour
 
     float rotationDirection;
 
+    bool isPlayerInControll = false;
 
     int index = 0;
 
@@ -42,9 +43,15 @@ public class ReindeerController : MonoBehaviour
         AddBodyPart();
     }
 
+    public void ChangePlayerControll(bool canControl)
+    {
+        isPlayerInControll = canControl;
+    }
+
 
     void Update()
     {
+        if (!isPlayerInControll) return;
         ForwordMovement();
         RotationMovement();
 
