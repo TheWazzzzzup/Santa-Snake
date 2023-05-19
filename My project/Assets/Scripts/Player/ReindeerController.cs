@@ -43,9 +43,16 @@ public class ReindeerController : MonoBehaviour
         AddBodyPart();
     }
 
-    public void ChangePlayerControll(bool canControl)
+    public void ToggelIsPlayerInControl()
     {
-        isPlayerInControll = canControl;
+        if (isPlayerInControll)
+        {
+            isPlayerInControll = false;
+        }
+        else
+        {
+            isPlayerInControll = true;
+        }
     }
 
 
