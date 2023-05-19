@@ -1,7 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class PresentSpawner : MonoBehaviour
@@ -10,8 +7,7 @@ public class PresentSpawner : MonoBehaviour
 
     [SerializeField] GameEvent spawnPresentEvent;
 
-    [SerializeField] GameObject particalEffectGameobject;
-    [SerializeField] ParticleSystem particalSystem;
+    [SerializeField] GameObject presentSpawnVFX;
 
     [SerializeField] float maximumX;
     [SerializeField] float maximumZ;
@@ -45,13 +41,13 @@ public class PresentSpawner : MonoBehaviour
         randomPresent = Random.Range(0, presentPrefabs.Length);
         Debug.Log($"Randon is {randomPresent}");
         instanciatedPresents[randomPresent].transform.position = vector3;
-        particalEffectGameobject.transform.position = vector3;
+        presentSpawnVFX.transform.position = vector3;
         spawnPresentEvent.Raise();
     }
 
     public void PlayEffect()
     {
-        Instantiate(particalEffectGameobject, vector3, particalEffectGameobject.transform.rotation);
+        Instantiate(presentSpawnVFX, vector3, presentSpawnVFX.transform.rotation);
     }
 
     public void Spawn()
@@ -80,7 +76,7 @@ public class PresentSpawner : MonoBehaviour
                 if (!(i == randomPresent))
                 {
                     instanciatedPresents[i].SetActive(false);
-                } 
+                }
             }
             isInitCalled = true;
         }
