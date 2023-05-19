@@ -65,7 +65,6 @@ public class ReindeerController : MonoBehaviour
 
             index++;
         }
-        Debug.Log(index);
     }
 
     public void AddBodyPart()

@@ -216,12 +216,37 @@ ModelImporter:
   - first:
       64: 6400000
     second: Lowpoly_Christmas_Pack_075:pCube16
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lowpoly_Christmas_Pack_075_phong1
+    second: {fileID: 2100000, guid: 32edcd9fb168d2749a42d8a45b35430f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lowpoly_Christmas_Pack_075_phong2
+    second: {fileID: 2100000, guid: b16005696c2fa0a4387ee02b6fcb373c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lowpoly_Christmas_Pack_075_phong3
+    second: {fileID: 2100000, guid: 4611cc8622edfc640be8cf0b7e3c8e6d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lowpoly_Christmas_Pack_075_phong4
+    second: {fileID: 2100000, guid: b16005696c2fa0a4387ee02b6fcb373c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lowpoly_Christmas_Pack_075_phong5
+    second: {fileID: 2100000, guid: 334faaff97e96824fae90899a5ebbd40, type: 2}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -301,7 +326,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.13
+    globalScale: 13
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

@@ -16,10 +16,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    [ContextMenu("AddScore")]
     public void AddScore()
     {
-        Debug.Log(score.score);
         score.AddScore(1);
     }
 
@@ -28,8 +26,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameOver");
     }
 
-    [ContextMenu("CheckScore")]
-    void CheckScore()
+    void CheckScoreDebug()
     {
         Debug.Log(score.score);
     }
