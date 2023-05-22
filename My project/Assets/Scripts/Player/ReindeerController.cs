@@ -18,6 +18,7 @@ public class ReindeerController : MonoBehaviour
     [SerializeField] GameObject thirdBodyPart;
     [SerializeField] GameObject santaBodyPart;
     [SerializeField] GameObject bodyPart;
+    [Space]
 
     [SerializeField] PlayerInput playerInput;
 
@@ -30,9 +31,13 @@ public class ReindeerController : MonoBehaviour
 
     float rotationDirection;
 
+    float currentRotationAngle;
     Vector3 playerEruler;
 
     Vector2 touchRotation;
+    float joystickAngle;
+
+    bool isAngleOffsetBiggerThanOneEighty;
 
     bool isPlayerInControll = false;
 
@@ -67,19 +72,52 @@ public class ReindeerController : MonoBehaviour
     {
         if (!isPlayerInControll) return;
 
-        // Expirement Zone
-        playerEruler = transform.rotation.eulerAngles;
 
-        rotationDirection = playerInput.actions["Steer"].ReadValue<Vector2>().x;
-        touchRotation = playerInput.actions["Steer"].ReadValue<Vector2>();
-        //Debug.Log(playerInput.actions["Steer"].ReadValue<Vector2>());
-        Debug.Log(Vector2.SignedAngle(Vector2.down, touchRotation));
-        //
+        currentRotationAngle = transform.rotation.eulerAngles.y;
+
 
 
         ForwordMovement();
+        JoystickAngleToEurler();
+        DetermineRotationDirection();
         RotationMovement();
         BodyMovement();
+    }
+
+    private void DetermineRotationDirection()
+    {
+        isAngleOffsetBiggerThanOneEighty = (Mathf.Abs(currentRotationAngle - joystickAngle)) > 180;
+
+        if (joystickAngle - 0.5 > currentRotationAngle)
+        {
+            if (!isAngleOffsetBiggerThanOneEighty) rotationDirection = 1;
+            else rotationDirection = -1;
+        }
+        else if (joystickAngle + 0.5 < currentRotationAngle)
+        {
+            if (!isAngleOffsetBiggerThanOneEighty) rotationDirection = -1;
+            else rotationDirection = 1;
+        }
+        else
+        {
+            Debug.Log("onpath");
+            rotationDirection = 0;
+        }
+    }
+
+    private void JoystickAngleToEurler()
+    {
+        touchRotation = playerInput.actions["Steer"].ReadValue<Vector2>();
+        joystickAngle = Vector2.SignedAngle(Vector2.down, touchRotation);
+        
+        if (joystickAngle < 0)
+        {
+            joystickAngle = joystickAngle * -1;
+        }
+        else
+        {
+            joystickAngle = (180 - joystickAngle) + 180;
+        }
     }
 
     private void RotationMovement()
