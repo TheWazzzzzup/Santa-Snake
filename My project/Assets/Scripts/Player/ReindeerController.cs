@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ReindeerController : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class ReindeerController : MonoBehaviour
     [SerializeField] GameObject santaBodyPart;
     [SerializeField] GameObject bodyPart;
 
+    [SerializeField] PlayerInput playerInput;
+
     private List<GameObject> bodyParts = new List<GameObject>();
     private List<Vector3> positionsHistory = new List<Vector3>();
 
@@ -26,6 +29,10 @@ public class ReindeerController : MonoBehaviour
     GameObject body;
 
     float rotationDirection;
+
+    Vector3 playerEruler;
+
+    Vector2 touchRotation;
 
     bool isPlayerInControll = false;
 
@@ -59,12 +66,30 @@ public class ReindeerController : MonoBehaviour
     void Update()
     {
         if (!isPlayerInControll) return;
+
+        // Expirement Zone
+        playerEruler = transform.rotation.eulerAngles;
+
+        rotationDirection = playerInput.actions["Steer"].ReadValue<Vector2>().x;
+        touchRotation = playerInput.actions["Steer"].ReadValue<Vector2>();
+        //Debug.Log(playerInput.actions["Steer"].ReadValue<Vector2>());
+        Debug.Log(Vector2.SignedAngle(Vector2.down, touchRotation));
+        //
+
+
         ForwordMovement();
         RotationMovement();
+        BodyMovement();
+    }
 
+    private void RotationMovement()
+    {
+        transform.Rotate(Vector3.up * rotationDirection * rotationSpeed * Time.deltaTime);
+    }
+
+    private void BodyMovement()
+    {
         positionsHistory.Insert(0, transform.position);
-
-        
         index = 0;
         foreach (var body in bodyParts)
         {
@@ -115,14 +140,19 @@ public class ReindeerController : MonoBehaviour
         currentBodyLength++;
     }
 
-    private void RotationMovement()
-    {
-        rotationDirection = Input.GetAxis("Horizontal");
-        transform.Rotate(Vector3.up * rotationDirection * rotationSpeed * Time.deltaTime);
-    }
-
     private void ForwordMovement()
     {
         transform.position += transform.forward * sledSpeed * Time.deltaTime;
     }
 }
+
+
+#region * * * Delete Me - Old Script * * *
+
+//    private void RotationMovement()
+//{
+//    rotationDirection = Input.GetAxis("Horizontal");
+//    transform.Rotate(Vector3.up * rotationDirection * rotationSpeed * Time.deltaTime);
+//}
+
+#endregion
