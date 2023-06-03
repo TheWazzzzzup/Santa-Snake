@@ -15,10 +15,10 @@ public class Score : ScriptableObject
     {
         score += x;
 
-        if (targetScoreEvent != null && score % 10 == 0)
-        {
-            targetScoreEvent.Raise();
-        }
+        targetScoreEvent.Raise();
+        //if (targetScoreEvent != null && score % 10 == 0)
+        //{
+        //}
     }
     
     public void ResetScore()

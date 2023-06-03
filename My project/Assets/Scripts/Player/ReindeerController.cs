@@ -25,6 +25,8 @@ public class ReindeerController : MonoBehaviour
     private List<GameObject> bodyParts = new List<GameObject>();
     private List<Vector3> positionsHistory = new List<Vector3>();
 
+    bool isPlayingWithKeyboard = true;
+
     uint currentBodyLength = 0;
 
     GameObject body;
@@ -72,28 +74,39 @@ public class ReindeerController : MonoBehaviour
     {
         if (!isPlayerInControll) return;
 
-
         currentRotationAngle = transform.rotation.eulerAngles.y;
 
+        if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0 || isPlayingWithKeyboard)
+        {
+            rotationDirection = Input.GetAxis("Horizontal");
+            ForwordMovement();
+            RotationMovement();
+            BodyMovement();
+        }
 
+        if (!isPlayingWithKeyboard)
+        {
+            ForwordMovement();
+            JoystickAngleToEurler();
+            DetermineRotationDirection();
+            RotationMovement();
+            BodyMovement();
+        }
 
-        ForwordMovement();
-        JoystickAngleToEurler();
-        DetermineRotationDirection();
-        RotationMovement();
-        BodyMovement();
+        if (!(playerInput.actions["Steer"].ReadValue<Vector2>() == Vector2.zero)) isPlayingWithKeyboard = false;
+        else isPlayingWithKeyboard = true;
     }
 
     private void DetermineRotationDirection()
     {
         isAngleOffsetBiggerThanOneEighty = (Mathf.Abs(currentRotationAngle - joystickAngle)) > 180;
 
-        if (joystickAngle - 0.5 > currentRotationAngle)
+        if (joystickAngle - 1.5 > currentRotationAngle)
         {
             if (!isAngleOffsetBiggerThanOneEighty) rotationDirection = 1;
             else rotationDirection = -1;
         }
-        else if (joystickAngle + 0.5 < currentRotationAngle)
+        else if (joystickAngle + 1.5 < currentRotationAngle)
         {
             if (!isAngleOffsetBiggerThanOneEighty) rotationDirection = -1;
             else rotationDirection = 1;
