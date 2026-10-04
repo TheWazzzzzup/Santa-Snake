@@ -196,14 +196,3 @@ public class ReindeerController : MonoBehaviour
         transform.position += transform.forward * sledSpeed * Time.deltaTime;
     }
 }
-
-
-#region * * * Delete Me - Old Script * * *
-
-//    private void RotationMovement()
-//{
-//    rotationDirection = Input.GetAxis("Horizontal");
-//    transform.Rotate(Vector3.up * rotationDirection * rotationSpeed * Time.deltaTime);
-//}
-
-#endregion
